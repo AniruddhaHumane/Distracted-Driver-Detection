@@ -1,0 +1,1001 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Key point based augmentation}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Key point based data augmentation for Distracted Driver
+Detection}\label{key-point-based-data-augmentation-for-distracted-driver-detection}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{preprocessing}\PY{n+nn}{.}\PY{n+nn}{image} \PY{k}{import} \PY{n}{ImageDataGenerator}
+          \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+          \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Conv2D}\PY{p}{,} \PY{n}{MaxPooling2D}
+          \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Activation}\PY{p}{,} \PY{n}{Dropout}\PY{p}{,} \PY{n}{Flatten}\PY{p}{,} \PY{n}{Dense}
+          \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{backend} \PY{k}{as} \PY{n}{K}
+          \PY{n}{K}\PY{o}{.}\PY{n}{set\PYZus{}image\PYZus{}dim\PYZus{}ordering}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{th}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{optimizers} \PY{k}{import} \PY{n}{RMSprop}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keys.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{o}{.}\PY{n}{str}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:}              0        1        2        3        4
+         0   img\_56.jpg  192,178  461,126  443,219  587,321
+         1   img\_63.jpg  333,135   636,56  581,171  637,383
+         2  img\_118.jpg  242,134  539,161  540,240  633,398
+         3  img\_120.jpg  163,132  479,110  440,213  592,304
+         4  img\_138.jpg  192,185  514,105  490,213  588,407
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{data}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{image}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Head}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left\PYZus{}hand}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steering\PYZus{}wheel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{right\PYZus{}hand}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:}          image     Head left\_hand steering\_wheel right\_hand
+         0   img\_56.jpg  192,178   461,126        443,219    587,321
+         1   img\_63.jpg  333,135    636,56        581,171    637,383
+         2  img\_118.jpg  242,134   539,161        540,240    633,398
+         3  img\_120.jpg  163,132   479,110        440,213    592,304
+         4  img\_138.jpg  192,185   514,105        490,213    588,407
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Head\PYZus{}x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Head\PYZus{}y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Head}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{str}
+         \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left\PYZus{}hand\PYZus{}x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left\PYZus{}hand\PYZus{}y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left\PYZus{}hand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{str}
+         \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steering\PYZus{}wheel\PYZus{}x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steering\PYZus{}wheel\PYZus{}y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steering\PYZus{}wheel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{str}
+         \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{right\PYZus{}hand\PYZus{}x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{right\PYZus{}hand\PYZus{}y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right\PYZus{}hand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{str}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:}          image     Head left\_hand steering\_wheel right\_hand Head\_x Head\_y  \textbackslash{}
+         0   img\_56.jpg  192,178   461,126        443,219    587,321    192    178   
+         1   img\_63.jpg  333,135    636,56        581,171    637,383    333    135   
+         2  img\_118.jpg  242,134   539,161        540,240    633,398    242    134   
+         3  img\_120.jpg  163,132   479,110        440,213    592,304    163    132   
+         4  img\_138.jpg  192,185   514,105        490,213    588,407    192    185   
+         
+           left\_hand\_x left\_hand\_y steering\_wheel\_x steering\_wheel\_y right\_hand\_x  \textbackslash{}
+         0         461         126              443              219          587   
+         1         636          56              581              171          637   
+         2         539         161              540              240          633   
+         3         479         110              440              213          592   
+         4         514         105              490              213          588   
+         
+           right\_hand\_y  
+         0          321  
+         1          383  
+         2          398  
+         3          304  
+         4          407  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Head}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left\PYZus{}hand}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steering\PYZus{}wheel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{right\PYZus{}hand}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:}          image Head\_x Head\_y left\_hand\_x left\_hand\_y steering\_wheel\_x  \textbackslash{}
+         0   img\_56.jpg    192    178         461         126              443   
+         1   img\_63.jpg    333    135         636          56              581   
+         2  img\_118.jpg    242    134         539         161              540   
+         3  img\_120.jpg    163    132         479         110              440   
+         4  img\_138.jpg    192    185         514         105              490   
+         
+           steering\_wheel\_y right\_hand\_x right\_hand\_y  
+         0              219          587          321  
+         1              171          637          383  
+         2              240          633          398  
+         3              213          592          304  
+         4              213          588          407  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}123}]:} \PY{k}{def} \PY{n+nf}{key\PYZus{}model}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{model}\PY{o}{=}\PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{150}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+          
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+          
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} the model so far outputs 3D feature maps (height, width, features)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Flatten}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} this converts our 3D feature maps to 1D feature vectors}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} 64 neurons}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} 64 neurons}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} 64 neurons}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} output layer: get 8 coordinate values}
+              \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean\PYZus{}squared\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{n}{RMSprop}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{k}{return} \PY{n}{model}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{data}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}77}]:} array([['img\_56.jpg', '192', '178', {\ldots}, '219', '587', '321'],
+                ['img\_63.jpg', '333', '135', {\ldots}, '171', '637', '383'],
+                ['img\_118.jpg', '242', '134', {\ldots}, '240', '633', '398'],
+                {\ldots}, 
+                ['img\_20722.jpg', '206', '148', {\ldots}, '217', '592', '336'],
+                ['img\_20750.jpg', '216', '108', {\ldots}, '164', '625', '291'],
+                ['img\_20763.jpg', '288', '92', {\ldots}, '170', '628', '339']], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{datasets}\PY{p}{,} \PY{n}{linear\PYZus{}model}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{,} \PY{n}{KFold}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{wrappers}\PY{n+nn}{.}\PY{n+nn}{scikit\PYZus{}learn} \PY{k}{import} \PY{n}{KerasRegressor}
+         \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{42}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{X} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{image}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{image}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:}   Head\_x Head\_y left\_hand\_x left\_hand\_y steering\_wheel\_x steering\_wheel\_y  \textbackslash{}
+         0    192    178         461         126              443              219   
+         1    333    135         636          56              581              171   
+         2    242    134         539         161              540              240   
+         3    163    132         479         110              440              213   
+         4    192    185         514         105              490              213   
+         
+           right\_hand\_x right\_hand\_y  
+         0          587          321  
+         1          637          383  
+         2          633          398  
+         3          592          304  
+         4          588          407  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{Y} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{Y}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}86}]:} array([['192', '178', '461', {\ldots}, '219', '587', '321'],
+                ['333', '135', '636', {\ldots}, '171', '637', '383'],
+                ['242', '134', '539', {\ldots}, '240', '633', '398'],
+                {\ldots}, 
+                ['206', '148', '464', {\ldots}, '217', '592', '336'],
+                ['216', '108', '535', {\ldots}, '164', '625', '291'],
+                ['288', '92', '576', {\ldots}, '170', '628', '339']], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{estimator} \PY{o}{=} \PY{n}{KerasRegressor}\PY{p}{(}\PY{n}{build\PYZus{}fn}\PY{o}{=}\PY{n}{key\PYZus{}model}\PY{p}{,} \PY{n}{nb\PYZus{}epoch}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{n}{kfold} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{seed}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+          \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{n}{fname}\PY{p}{)}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{150}\PY{p}{)}\PY{p}{,}\PY{n}{Image}\PY{o}{.}\PY{n}{ANTIALIAS}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{fname} \PY{o+ow}{in} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{key\PYZus{}data/}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{X}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}134}]:} \PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{x}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}134}]:} (499, 3, 150, 150)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}135}]:} \PY{n}{x}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}135}]:} array([[[[ 40,  38,  38, {\ldots}, 249, 145,  13],
+                   [ 39,  39,  38, {\ldots}, 236, 139,  14],
+                   [ 38,  39,  39, {\ldots}, 216, 131,  13],
+                   {\ldots}, 
+                   [  5,   5,   5, {\ldots},  16,  14,  10],
+                   [  5,   5,   5, {\ldots},  15,  18,  13],
+                   [  5,   5,   5, {\ldots},  16,  19,  17]],
+          
+                  [[ 48,  46,  47, {\ldots}, 255, 158,  30],
+                   [ 47,  47,  47, {\ldots}, 255, 159,  31],
+                   [ 46,  47,  47, {\ldots}, 255, 160,  30],
+                   {\ldots}, 
+                   [  6,   6,   6, {\ldots},  16,  15,  11],
+                   [  6,   6,   6, {\ldots},  13,  18,  14],
+                   [  6,   6,   6, {\ldots},  13,  19,  17]],
+          
+                  [[ 33,  31,  31, {\ldots}, 255, 160,  24],
+                   [ 33,  33,  32, {\ldots}, 255, 162,  27],
+                   [ 34,  35,  34, {\ldots}, 255, 164,  29],
+                   {\ldots}, 
+                   [  1,   1,   1, {\ldots},  13,   9,   4],
+                   [  1,   1,   1, {\ldots},  18,  16,   8],
+                   [  1,   1,   1, {\ldots},  25,  23,  16]]],
+          
+          
+                 [[[ 27,  27,  35, {\ldots}, 165, 184, 218],
+                   [ 28,  22,  14, {\ldots}, 171, 184, 203],
+                   [ 30,  44, 102, {\ldots}, 174, 175, 178],
+                   {\ldots}, 
+                   [ 38,  38,  39, {\ldots},  19,  17,  20],
+                   [ 38,  37,  38, {\ldots},  18,  18,  18],
+                   [ 41,  38,  38, {\ldots},  15,  25,  19]],
+          
+                  [[ 35,  39,  40, {\ldots}, 255, 252, 253],
+                   [ 35,  34,  21, {\ldots}, 255, 255, 253],
+                   [ 36,  54, 108, {\ldots}, 253, 254, 250],
+                   {\ldots}, 
+                   [ 53,  53,  54, {\ldots},  19,  17,  20],
+                   [ 53,  52,  53, {\ldots},  18,  18,  18],
+                   [ 56,  53,  53, {\ldots},  15,  25,  19]],
+          
+                  [[ 24,  25,  31, {\ldots}, 254, 250, 255],
+                   [ 26,  24,  13, {\ldots}, 255, 254, 254],
+                   [ 30,  50, 102, {\ldots}, 255, 254, 250],
+                   {\ldots}, 
+                   [ 48,  48,  49, {\ldots},  20,  19,  22],
+                   [ 48,  47,  48, {\ldots},  20,  20,  20],
+                   [ 51,  48,  48, {\ldots},  17,  27,  21]]],
+          
+          
+                 [[[ 44,  44,  44, {\ldots}, 254, 255, 254],
+                   [ 44,  44,  44, {\ldots}, 240, 251, 255],
+                   [ 44,  44,  44, {\ldots}, 215, 236, 251],
+                   {\ldots}, 
+                   [  9,  30,  47, {\ldots},  42,  36,  60],
+                   [ 39,  39,  42, {\ldots},  39,  34,  58],
+                   [ 49,  48,  49, {\ldots},  36,  31,  50]],
+          
+                  [[ 52,  52,  52, {\ldots}, 253, 254, 253],
+                   [ 52,  52,  52, {\ldots}, 255, 255, 253],
+                   [ 52,  52,  52, {\ldots}, 253, 254, 254],
+                   {\ldots}, 
+                   [  8,  30,  46, {\ldots},  51,  47,  79],
+                   [ 44,  44,  47, {\ldots},  49,  46,  77],
+                   [ 59,  59,  59, {\ldots},  47,  44,  70]],
+          
+                  [[ 39,  39,  39, {\ldots}, 249, 252, 253],
+                   [ 40,  40,  40, {\ldots}, 238, 248, 253],
+                   [ 42,  42,  42, {\ldots}, 224, 240, 250],
+                   {\ldots}, 
+                   [  3,  23,  40, {\ldots},  65,  62,  91],
+                   [ 37,  38,  40, {\ldots},  59,  57,  85],
+                   [ 51,  51,  51, {\ldots},  55,  52,  76]]],
+          
+          
+                 {\ldots}, 
+                 [[[ 36,  35,  36, {\ldots},  90, 121,  65],
+                   [ 34,  33,  33, {\ldots}, 205, 174,  96],
+                   [ 29,  31,  31, {\ldots}, 204, 231, 247],
+                   {\ldots}, 
+                   [101,  97,  94, {\ldots},   7,  15,  15],
+                   [107, 115,  31, {\ldots},   9,   9,   9],
+                   [115,  70,   0, {\ldots},  16,   9,   9]],
+          
+                  [[ 50,  48,  49, {\ldots}, 113, 162, 113],
+                   [ 45,  44,  44, {\ldots}, 249, 200, 106],
+                   [ 40,  41,  42, {\ldots}, 253, 255, 255],
+                   {\ldots}, 
+                   [153, 165, 140, {\ldots},   6,  14,  14],
+                   [163, 166,  52, {\ldots},   8,   8,   8],
+                   [175,  99,   0, {\ldots},  15,   8,   8]],
+          
+                  [[ 41,  39,  40, {\ldots},  75, 122,  82],
+                   [ 37,  36,  36, {\ldots}, 211, 174,  94],
+                   [ 32,  33,  34, {\ldots}, 230, 246, 255],
+                   {\ldots}, 
+                   [157, 160, 137, {\ldots},   4,  12,  12],
+                   [165, 164,  52, {\ldots},   6,   6,   6],
+                   [175, 103,   2, {\ldots},  13,   6,   6]]],
+          
+          
+                 [[[ 42,  45,  55, {\ldots}, 168, 192, 228],
+                   [ 46,  39,  28, {\ldots}, 187, 210, 235],
+                   [ 47,  71, 145, {\ldots}, 213, 224, 231],
+                   {\ldots}, 
+                   [ 51,  51,  51, {\ldots},  23,  26,  28],
+                   [ 48,  50,  51, {\ldots},  23,  28,  25],
+                   [ 49,  48,  51, {\ldots},  24,  31,  20]],
+          
+                  [[ 58,  57,  64, {\ldots}, 255, 252, 253],
+                   [ 59,  49,  38, {\ldots}, 255, 255, 255],
+                   [ 57,  80, 154, {\ldots}, 254, 255, 251],
+                   {\ldots}, 
+                   [ 67,  67,  67, {\ldots},  21,  24,  26],
+                   [ 68,  66,  65, {\ldots},  21,  26,  23],
+                   [ 70,  66,  64, {\ldots},  22,  29,  18]],
+          
+                  [[ 49,  54,  53, {\ldots}, 249, 246, 253],
+                   [ 51,  49,  27, {\ldots}, 251, 254, 255],
+                   [ 51,  84, 143, {\ldots}, 253, 255, 252],
+                   {\ldots}, 
+                   [ 64,  64,  64, {\ldots},  24,  27,  29],
+                   [ 64,  63,  62, {\ldots},  25,  29,  26],
+                   [ 65,  63,  62, {\ldots},  25,  32,  21]]],
+          
+          
+                 [[[ 26,  27,  29, {\ldots}, 146, 147, 176],
+                   [ 26,  28,  34, {\ldots}, 144, 163, 197],
+                   [ 34,  30,  13, {\ldots}, 151, 179, 188],
+                   {\ldots}, 
+                   [  8,   7,  23, {\ldots},  17,  15,  21],
+                   [  7,  23,  34, {\ldots},  16,  16,  18],
+                   [  3,  11,  10, {\ldots},  13,  19,  20]],
+          
+                  [[ 40,  39,  35, {\ldots}, 245, 241, 240],
+                   [ 39,  38,  40, {\ldots}, 241, 247, 253],
+                   [ 43,  37,  19, {\ldots}, 243, 255, 243],
+                   {\ldots}, 
+                   [  9,  10,  29, {\ldots},  16,  14,  20],
+                   [ 11,  28,  42, {\ldots},  15,  15,  17],
+                   [  9,  18,  19, {\ldots},  12,  18,  19]],
+          
+                  [[ 21,  20,  22, {\ldots}, 248, 240, 243],
+                   [ 23,  26,  33, {\ldots}, 240, 245, 254],
+                   [ 30,  32,  16, {\ldots}, 240, 254, 244],
+                   {\ldots}, 
+                   [  5,   8,  29, {\ldots},  14,  12,  18],
+                   [  6,  25,  41, {\ldots},  11,  11,  13],
+                   [  4,  15,  18, {\ldots},   7,  13,  15]]]], dtype=uint8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n}{Y}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}106}]:} (499, 8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{n}{results} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{estimator}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{kfold}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ResourceExhaustedError                    Traceback (most recent call last)
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}client\textbackslash{}session.py in \_do\_call(self, fn, *args)
+       1322     try:
+    -> 1323       return fn(*args)
+       1324     except errors.OpError as e:
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}client\textbackslash{}session.py in \_run\_fn(session, feed\_dict, fetch\_list, target\_list, options, run\_metadata)
+       1301                                    feed\_dict, fetch\_list, target\_list,
+    -> 1302                                    status, run\_metadata)
+       1303 
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}framework\textbackslash{}errors\_impl.py in \_\_exit\_\_(self, type\_arg, value\_arg, traceback\_arg)
+        472             compat.as\_text(c\_api.TF\_Message(self.status.status)),
+    --> 473             c\_api.TF\_GetCode(self.status.status))
+        474     \# Delete the underlying status object from memory otherwise it stays alive
+    
+
+        ResourceExhaustedError: OOM when allocating tensor with shape[100,146,146,64]
+    	 [[Node: conv2d\_26/convolution = Conv2D[T=DT\_FLOAT, data\_format="NHWC", padding="VALID", strides=[1, 1, 1, 1], use\_cudnn\_on\_gpu=true, \_device="/job:localhost/replica:0/task:0/device:CPU:0"](conv2d\_26/transpose, conv2d\_26/kernel/read)]]
+
+        
+    During handling of the above exception, another exception occurred:
+    
+
+        ResourceExhaustedError                    Traceback (most recent call last)
+
+        <ipython-input-136-6a5cba2e77d2> in <module>()
+    ----> 1 results = cross\_val\_score(estimator, x, Y, cv=kfold)
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}model\_selection\textbackslash{}\_validation.py in cross\_val\_score(estimator, X, y, groups, scoring, cv, n\_jobs, verbose, fit\_params, pre\_dispatch)
+        340                                 n\_jobs=n\_jobs, verbose=verbose,
+        341                                 fit\_params=fit\_params,
+    --> 342                                 pre\_dispatch=pre\_dispatch)
+        343     return cv\_results['test\_score']
+        344 
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}model\_selection\textbackslash{}\_validation.py in cross\_validate(estimator, X, y, groups, scoring, cv, n\_jobs, verbose, fit\_params, pre\_dispatch, return\_train\_score)
+        204             fit\_params, return\_train\_score=return\_train\_score,
+        205             return\_times=True)
+    --> 206         for train, test in cv.split(X, y, groups))
+        207 
+        208     if return\_train\_score:
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py in \_\_call\_\_(self, iterable)
+        777             \# was dispatched. In particular this covers the edge
+        778             \# case of Parallel used with an exhausted iterator.
+    --> 779             while self.dispatch\_one\_batch(iterator):
+        780                 self.\_iterating = True
+        781             else:
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py in dispatch\_one\_batch(self, iterator)
+        623                 return False
+        624             else:
+    --> 625                 self.\_dispatch(tasks)
+        626                 return True
+        627 
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py in \_dispatch(self, batch)
+        586         dispatch\_timestamp = time.time()
+        587         cb = BatchCompletionCallBack(dispatch\_timestamp, len(batch), self)
+    --> 588         job = self.\_backend.apply\_async(batch, callback=cb)
+        589         self.\_jobs.append(job)
+        590 
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}\_parallel\_backends.py in apply\_async(self, func, callback)
+        109     def apply\_async(self, func, callback=None):
+        110         """Schedule a func to be run"""
+    --> 111         result = ImmediateResult(func)
+        112         if callback:
+        113             callback(result)
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}\_parallel\_backends.py in \_\_init\_\_(self, batch)
+        330         \# Don't delay the application, to avoid keeping the input
+        331         \# arguments in memory
+    --> 332         self.results = batch()
+        333 
+        334     def get(self):
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py in \_\_call\_\_(self)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        132 
+        133     def \_\_len\_\_(self):
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py in <listcomp>(.0)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        132 
+        133     def \_\_len\_\_(self):
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}model\_selection\textbackslash{}\_validation.py in \_fit\_and\_score(estimator, X, y, scorer, train, test, verbose, parameters, fit\_params, return\_train\_score, return\_parameters, return\_n\_test\_samples, return\_times, error\_score)
+        456             estimator.fit(X\_train, **fit\_params)
+        457         else:
+    --> 458             estimator.fit(X\_train, y\_train, **fit\_params)
+        459 
+        460     except Exception as e:
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}wrappers\textbackslash{}scikit\_learn.py in fit(self, x, y, **kwargs)
+        145         fit\_args.update(kwargs)
+        146 
+    --> 147         history = self.model.fit(x, y, **fit\_args)
+        148 
+        149         return history
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}models.py in fit(self, x, y, batch\_size, epochs, verbose, callbacks, validation\_split, validation\_data, shuffle, class\_weight, sample\_weight, initial\_epoch, **kwargs)
+        891                               class\_weight=class\_weight,
+        892                               sample\_weight=sample\_weight,
+    --> 893                               initial\_epoch=initial\_epoch)
+        894 
+        895     def evaluate(self, x, y, batch\_size=32, verbose=1,
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}engine\textbackslash{}training.py in fit(self, x, y, batch\_size, epochs, verbose, callbacks, validation\_split, validation\_data, shuffle, class\_weight, sample\_weight, initial\_epoch, steps\_per\_epoch, validation\_steps, **kwargs)
+       1629                               initial\_epoch=initial\_epoch,
+       1630                               steps\_per\_epoch=steps\_per\_epoch,
+    -> 1631                               validation\_steps=validation\_steps)
+       1632 
+       1633     def evaluate(self, x=None, y=None,
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}engine\textbackslash{}training.py in \_fit\_loop(self, f, ins, out\_labels, batch\_size, epochs, verbose, callbacks, val\_f, val\_ins, shuffle, callback\_metrics, initial\_epoch, steps\_per\_epoch, validation\_steps)
+       1211                     batch\_logs['size'] = len(batch\_ids)
+       1212                     callbacks.on\_batch\_begin(batch\_index, batch\_logs)
+    -> 1213                     outs = f(ins\_batch)
+       1214                     if not isinstance(outs, list):
+       1215                         outs = [outs]
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}backend\textbackslash{}tensorflow\_backend.py in \_\_call\_\_(self, inputs)
+       2330         updated = session.run(self.outputs + [self.updates\_op],
+       2331                               feed\_dict=feed\_dict,
+    -> 2332                               **self.session\_kwargs)
+       2333         return updated[:len(self.outputs)]
+       2334 
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}client\textbackslash{}session.py in run(self, fetches, feed\_dict, options, run\_metadata)
+        887     try:
+        888       result = self.\_run(None, fetches, feed\_dict, options\_ptr,
+    --> 889                          run\_metadata\_ptr)
+        890       if run\_metadata:
+        891         proto\_data = tf\_session.TF\_GetBuffer(run\_metadata\_ptr)
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}client\textbackslash{}session.py in \_run(self, handle, fetches, feed\_dict, options, run\_metadata)
+       1118     if final\_fetches or final\_targets or (handle and feed\_dict\_tensor):
+       1119       results = self.\_do\_run(handle, final\_targets, final\_fetches,
+    -> 1120                              feed\_dict\_tensor, options, run\_metadata)
+       1121     else:
+       1122       results = []
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}client\textbackslash{}session.py in \_do\_run(self, handle, target\_list, fetch\_list, feed\_dict, options, run\_metadata)
+       1315     if handle is None:
+       1316       return self.\_do\_call(\_run\_fn, self.\_session, feeds, fetches, targets,
+    -> 1317                            options, run\_metadata)
+       1318     else:
+       1319       return self.\_do\_call(\_prun\_fn, self.\_session, handle, feeds, fetches)
+    
+
+        E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}client\textbackslash{}session.py in \_do\_call(self, fn, *args)
+       1334         except KeyError:
+       1335           pass
+    -> 1336       raise type(e)(node\_def, op, message)
+       1337 
+       1338   def \_extend\_graph(self):
+    
+
+        ResourceExhaustedError: OOM when allocating tensor with shape[100,146,146,64]
+    	 [[Node: conv2d\_26/convolution = Conv2D[T=DT\_FLOAT, data\_format="NHWC", padding="VALID", strides=[1, 1, 1, 1], use\_cudnn\_on\_gpu=true, \_device="/job:localhost/replica:0/task:0/device:CPU:0"](conv2d\_26/transpose, conv2d\_26/kernel/read)]]
+    
+    Caused by op 'conv2d\_26/convolution', defined at:
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}runpy.py", line 193, in \_run\_module\_as\_main
+        "\_\_main\_\_", mod\_spec)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}runpy.py", line 85, in \_run\_code
+        exec(code, run\_globals)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py", line 16, in <module>
+        app.launch\_new\_instance()
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}traitlets\textbackslash{}config\textbackslash{}application.py", line 658, in launch\_instance
+        app.start()
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\textbackslash{}kernelapp.py", line 478, in start
+        self.io\_loop.start()
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}zmq\textbackslash{}eventloop\textbackslash{}ioloop.py", line 177, in start
+        super(ZMQIOLoop, self).start()
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tornado\textbackslash{}ioloop.py", line 888, in start
+        handler\_func(fd\_obj, events)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tornado\textbackslash{}stack\_context.py", line 277, in null\_wrapper
+        return fn(*args, **kwargs)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}zmq\textbackslash{}eventloop\textbackslash{}zmqstream.py", line 440, in \_handle\_events
+        self.\_handle\_recv()
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}zmq\textbackslash{}eventloop\textbackslash{}zmqstream.py", line 472, in \_handle\_recv
+        self.\_run\_callback(callback, msg)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}zmq\textbackslash{}eventloop\textbackslash{}zmqstream.py", line 414, in \_run\_callback
+        callback(*args, **kwargs)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tornado\textbackslash{}stack\_context.py", line 277, in null\_wrapper
+        return fn(*args, **kwargs)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\textbackslash{}kernelbase.py", line 281, in dispatcher
+        return self.dispatch\_shell(stream, msg)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\textbackslash{}kernelbase.py", line 232, in dispatch\_shell
+        handler(stream, idents, msg)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\textbackslash{}kernelbase.py", line 397, in execute\_request
+        user\_expressions, allow\_stdin)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\textbackslash{}ipkernel.py", line 208, in do\_execute
+        res = shell.run\_cell(code, store\_history=store\_history, silent=silent)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\textbackslash{}zmqshell.py", line 533, in run\_cell
+        return super(ZMQInteractiveShell, self).run\_cell(*args, **kwargs)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}IPython\textbackslash{}core\textbackslash{}interactiveshell.py", line 2728, in run\_cell
+        interactivity=interactivity, compiler=compiler, result=result)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}IPython\textbackslash{}core\textbackslash{}interactiveshell.py", line 2850, in run\_ast\_nodes
+        if self.run\_code(code, result):
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}IPython\textbackslash{}core\textbackslash{}interactiveshell.py", line 2910, in run\_code
+        exec(code\_obj, self.user\_global\_ns, self.user\_ns)
+      File "<ipython-input-136-6a5cba2e77d2>", line 1, in <module>
+        results = cross\_val\_score(estimator, x, Y, cv=kfold)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}model\_selection\textbackslash{}\_validation.py", line 342, in cross\_val\_score
+        pre\_dispatch=pre\_dispatch)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}model\_selection\textbackslash{}\_validation.py", line 206, in cross\_validate
+        for train, test in cv.split(X, y, groups))
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py", line 779, in \_\_call\_\_
+        while self.dispatch\_one\_batch(iterator):
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py", line 625, in dispatch\_one\_batch
+        self.\_dispatch(tasks)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py", line 588, in \_dispatch
+        job = self.\_backend.apply\_async(batch, callback=cb)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}\_parallel\_backends.py", line 111, in apply\_async
+        result = ImmediateResult(func)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}\_parallel\_backends.py", line 332, in \_\_init\_\_
+        self.results = batch()
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py", line 131, in \_\_call\_\_
+        return [func(*args, **kwargs) for func, args, kwargs in self.items]
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py", line 131, in <listcomp>
+        return [func(*args, **kwargs) for func, args, kwargs in self.items]
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}model\_selection\textbackslash{}\_validation.py", line 458, in \_fit\_and\_score
+        estimator.fit(X\_train, y\_train, **fit\_params)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}wrappers\textbackslash{}scikit\_learn.py", line 136, in fit
+        self.model = self.build\_fn(**self.filter\_sk\_params(self.build\_fn))
+      File "<ipython-input-123-356c77d71dab>", line 6, in key\_model
+        model.add(Conv2D(64, (3, 3)))
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}models.py", line 475, in add
+        output\_tensor = layer(self.outputs[0])
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}engine\textbackslash{}topology.py", line 603, in \_\_call\_\_
+        output = self.call(inputs, **kwargs)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}layers\textbackslash{}convolutional.py", line 164, in call
+        dilation\_rate=self.dilation\_rate)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}backend\textbackslash{}tensorflow\_backend.py", line 3185, in conv2d
+        data\_format=tf\_data\_format)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}ops\textbackslash{}nn\_ops.py", line 751, in convolution
+        return op(input, filter)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}ops\textbackslash{}nn\_ops.py", line 835, in \_\_call\_\_
+        return self.conv\_op(inp, filter)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}ops\textbackslash{}nn\_ops.py", line 499, in \_\_call\_\_
+        return self.call(inp, filter)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}ops\textbackslash{}nn\_ops.py", line 187, in \_\_call\_\_
+        name=self.name)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}ops\textbackslash{}gen\_nn\_ops.py", line 630, in conv2d
+        data\_format=data\_format, name=name)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}framework\textbackslash{}op\_def\_library.py", line 787, in \_apply\_op\_helper
+        op\_def=op\_def)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}framework\textbackslash{}ops.py", line 2956, in create\_op
+        op\_def=op\_def)
+      File "E:\textbackslash{}Software\textbackslash{}Conda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}framework\textbackslash{}ops.py", line 1470, in \_\_init\_\_
+        self.\_traceback = self.\_graph.\_extract\_stack()  \# pylint: disable=protected-access
+    
+    ResourceExhaustedError (see above for traceback): OOM when allocating tensor with shape[100,146,146,64]
+    	 [[Node: conv2d\_26/convolution = Conv2D[T=DT\_FLOAT, data\_format="NHWC", padding="VALID", strides=[1, 1, 1, 1], use\_cudnn\_on\_gpu=true, \_device="/job:localhost/replica:0/task:0/device:CPU:0"](conv2d\_26/transpose, conv2d\_26/kernel/read)]]
+    
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
